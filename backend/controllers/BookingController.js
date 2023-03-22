@@ -2,7 +2,6 @@ const express = require('express');
 const aqp = require('api-query-params');
 const {BookingModel, BookingJsonSchema} = require("../models/BookingModel");
 const {validate} = require("jsonschema");
-const {date_jsonSchema} = require("mongoose-schema-jsonschema/lib/types");
 
 module.exports = (keycloak) => {
 

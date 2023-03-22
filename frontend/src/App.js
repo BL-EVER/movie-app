@@ -11,31 +11,37 @@ import MovieTheaterPage from "./pages/MovieTheater/MovieTheaterPage";
 import HomePage from "./pages/Home/HomePage";
 import MoviePage from "./pages/Movie/MoviePage";
 import TicketPage from "./pages/Ticket/TicketPage";
+import ProfilePage from "./pages/Profile/ProfilePage";
 
 const router = createBrowserRouter([
     {
         path: "/",
-        element: <HomePage/>,
+        element: <Header><HomePage/></Header>,
         errorElement: <NotFound />,
     },
     {
         path: "/movieTheater",
-        element: <Protected authorizationRoles={['admin', 'user', 'manager']}><MovieTheaterPage/></Protected>,
+        element: <Header><Protected authorizationRoles={['admin', 'manager']}><MovieTheaterPage/></Protected></Header>,
         errorElement: <NotFound />,
     },
     {
         path: "/movieTheater/:_id",
-        element: <Protected authorizationRoles={['admin', 'manager']}><MovieTheaterPage/></Protected>,
+        element: <Header><Protected authorizationRoles={['admin', 'manager']}><MovieTheaterPage/></Protected></Header>,
         errorElement: <NotFound />,
     },
     {
         path: "/movie/:_id",
-        element: <MoviePage/>,
+        element: <Header><MoviePage/></Header>,
         errorElement: <NotFound />,
     },
     {
         path: "/ticket/:movieId",
-        element: <TicketPage/>,
+        element: <Header><Protected authorizationRoles={['admin', 'user', 'manager']}><TicketPage/></Protected></Header>,
+        errorElement: <NotFound />,
+    },
+    {
+        path: "/profile",
+        element: <Header><Protected authorizationRoles={['admin', 'user', 'manager']}><ProfilePage/></Protected></Header>,
         errorElement: <NotFound />,
     }
 ]);
@@ -43,7 +49,6 @@ const router = createBrowserRouter([
 function App() {
   return (
       <>
-          <Header/>
           <RouterProvider router={router} />
           <ToastContainer />
       </>

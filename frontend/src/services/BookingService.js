@@ -1,10 +1,16 @@
 import axios from "./AxiosClient";
 
 class BookingService {
-    getBookings() {
+
+    getBookings(filter) {
+        if(!filter)
+            return axios({
+                method: 'get',
+                url: 'api/Booking'
+            })
         return axios({
             method: 'get',
-            url: 'api/Booking/'
+            url: `api/Booking/${filter}`
         })
     }
 
